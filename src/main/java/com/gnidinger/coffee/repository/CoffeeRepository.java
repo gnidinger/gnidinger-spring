@@ -1,0 +1,18 @@
+package com.gnidinger.coffee.repository;
+
+import com.gnidinger.coffee.entity.Coffee;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.Optional;
+
+public interface CoffeeRepository extends JpaRepository<Coffee, Long> { // Crud -> Jpa
+    Optional<Coffee> findByCoffeeCode(String coffeeCode);
+
+    @Query(value = "SELECT c FROM Coffee c WHERE c.coffeeId = :coffeeId")
+
+//    @Query(value = "FROM Coffee c WHERE c.coffeeId = :coffeeId")  // (1)
+//    @Query(value = "SELECT * FROM COFFEE WHERE coffee_Id = :coffeeId", nativeQuery = true) //(2)
+
+    Optional<Coffee> findByCoffee(long coffeeId);
+}
